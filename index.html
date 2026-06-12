@@ -1129,7 +1129,7 @@ function saveStateWithFotos() { /* no-op, saving happens per position */ }
 async function loadState() {
   try {
     showLoader('Daten werden geladen...');
-    const data = await sbFetch('GET', 'positionen?select=*');
+    const data = await sbFetch('GET', 'positionen_kiga_goettingen?select=*');
     if (data) {
       let newest = null;
       data.forEach(row => {
@@ -1211,7 +1211,7 @@ function hideLoader() {
 async function clearState() {
   if(confirm('Alle Einträge wirklich löschen? Das kann nicht rückgängig gemacht werden.')) {
     try {
-      await sbFetch('DELETE', 'positionen?pos=neq.null');
+      await sbFetch('DELETE', 'positionen_kiga_goettingen?pos=neq.null');
       Object.keys(ST).forEach(k => delete ST[k]);
       buildPanels();
       upStats();
@@ -1222,7 +1222,7 @@ async function clearState() {
 // Polling für Live-Updates (alle 30 Sekunden)
 setInterval(async () => {
   try {
-    const data = await sbFetch('GET', 'positionen?select=*');
+    const data = await sbFetch('GET', 'positionen_kiga_goettingen?select=*');
     if (!data) return;
     let changed = false;
     let newest = null;
